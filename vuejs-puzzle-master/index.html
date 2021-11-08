@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja" >
+<head>
+  <meta charset="UTF-8">
+  <meta data-rh="true" name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <title>JavaScript Puzzle Game</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="page-container">
+    	<div id="app">
+    		<div id="game-container">
+    			<div id="tile-game">
+    				<countdown-timer :seconds='120' :run="gameRunning" @out-of-time="playerLoss=$event">
+    				</countdown-timer>
+    				<div id="tile-container-outer">
+    					<div id="tile-container-inner">
+    						<div v-if="playerWon" class="layer win">
+    							<p id="win-text">You Won!</p>
+    						</div>
+    						<div v-if="playerLoss" class="layer lose">
+    							<p>時間切れ</p>
+    							<p>ゲームオーバー</p>
+    						</div>
+    						<tile-component v-for="tile in tiles" :tile="tile" :key="tile.id" @is-adjacent="slideTile(tile);">
+    						</tile-component>
+    					</div>
+    				</div>
+    				<div>
+    					<p> 動かした数: {{ playerMoves }}</p>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+<!-- partial -->
+  <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
